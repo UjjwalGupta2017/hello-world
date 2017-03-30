@@ -1,1 +1,38 @@
 -----------Sanjeev Gyan-------------
+connecting hive developer to hive running in linux
+
+Steps for cloudera distribution:
+1.u should have hadoop & hive installed on linux(in virtual machine)(which comes with cloudera itself)
+2.type  sudo yum install hive-jdbc   to install hive-jdbc drivers
+3. set  class path for usr/lib/hive/lib/*.jar and usr/lib/hadoop/lib/*.jar
+4.start hive thrift serve by typing     hive --service hiveserver &
+5. open hive developer software in windows environment and create connection by
+
+name: Hive_conn
+driver:org.apache.hadoop.hive.jdbc.HiveDriver
+URL:jdbc:hive://192.168.71.129:10000/default
+
+the ip address given above is of the linux machine on which hive is running.
+in case that doesnot works then try to set the class path for java as well. 
+
+
+-------------HUE-------------
+to start hue type   sudo /etc/init.d/hue start
+
+then go to browser and type    localhost:8088
+if this doesnot works then     localhost:8888
+
+then it will ask for username & password
+u can try
+username= training
+pass= training
+
+or
+cloudera 
+cloudera
+
+or 
+
+hue
+hue
+----------------------------------------------------------------------------------------------
