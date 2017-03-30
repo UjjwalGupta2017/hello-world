@@ -1,0 +1,188 @@
+
+//Architecture
+namenode + datanode1 + datanode2 + datanode3 + standbynode
+
+To access Namenode on browser just type:
+namenode : 50030  eg. demstrnode:50030
+
+To access Job Tracker on browser just type:
+
+namenode : 50070
+
+To access HUE 
+
+namenode : 8888
+
+//Hive commands
+
+LOAD DATA LOCAL INPATH '/empty.txt' overwrite INTO TABLE apr2
+
+insert into table backupls2 select * from apr2
+
+select * from banglore_left_out1 where (empnum1 = '106893' or empnum1 ='113506') and dentry like '%7/18/2015%'
+
+create table mytable(name string, address string, place string,dob string) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE 
+
+create view myview as select * from people limit 10
+
+select id, sum(purchaseamount) as custSpendings from transactions_sample2
+group by id
+sort by custSpendings DESC
+limit 10;
+
+//sqoop
+
+sqoop import --connect "jdbc:sqlserver://DELEAVSQLDB7:2434;database=AccessData;username=1234;password=1234" --hive-import --table badgeincludetemp  --m 1
+
+
+//hadoop cmds
+sudo hadoop fs -mkdir /user/test
+
+
+sudo hadoop fs -put /root/practice/transactions_practice.csv /user/test
+
+
+//hive partition
+
+step 1: 
+
+CREATE TABLE T_USER_LOG(USER_ID INT,
+NAME STRING,SITE STRING,DT STRING,COUNTRY STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE;
+
+LOAD DATA LOCAL INPATH 'UserLog.txt' OVERWRITE INTO TABLE T_USER_LOG
+-----------
+step 2: create partition table
+
+CREATE TABLE T_USER_LOG_DYN( USER_ID INT,
+NAME STRING,SITE STRING,DT STRING) 
+PARTITIONED BY (COUNTRY STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STROED AS TEXTFILE;
+
+----------
+step 3 : set hive properties
+
+SET hive.exec,dynamic.partition = true;
+
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+step 4 : insert into new partition table 
+
+INSERT OVERWRITE TABLE T_USER_LOG_DYN PARTITION(COUNTRY) 
+SELECT USER_ID,NAME,SITE,DT,COUNTY FROM T_USER_LOG;
+
+NOTE : We can write these commands in a .hql script eg. doitnow.hql and
+then execute it by the following command
+"hive -f doitnow.hql"
+-----------------
+
+//bucketing in hive
+
+step 1:
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamci.partition.mode = nonstrict;
+SET hive.exec.max.dynamic.partitions.pernode = 1000;
+SET hive.enforce.bucketing = true;
+
+
+step 2:
+CREATE TABLE T_USER_LOG_BUCKET(USER_ID INT,NAME STRING,SITE,COUNTRY STRING)
+PARTITIONED BY (DT STRING)
+CLUSTERED BY (USER_ID) INTO 4 BUCKETS
+ROW FORMAT DELIMITED
+FEILDS TERMINATED BY '\t'
+STORED AS TEXTFILE;
+
+
+step 3 :
+INSERT OVERWRITETABLE T_USER_LOG_BUCKET PARTITION(DT)
+SELECT USER_ID,NAME,SITE,COUNTRY,DT FROM T_USER_LOG;
+
+https://www.linkedin.com/pulse/hive-partitioning-bucketing-examples-gaurav-singh
+
+when we create a table with partition and buckets, then we can easily see that info in the "describe formatted tablename".
+we can easi;y see the number of buckets, bucket column, partition column.
+
+-----------------------
+------------------------
+
+
+INSERT OVERWRITE TABLE transactions_production PARTITION (chain) 
+select id,dept, category, company,brand,date1,productsize,productmeasure,
+purchasequantity,purchaseamount,chain from transactions_staging;
+
+
+
+CREATE TABLE transactions_sample2
+( id string,
+dept string,
+category string,
+company string,
+brand string,
+date1 string,
+productsize string,
+productmeasure string,
+purchasequantity string,
+purchaseamount string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+
+
+
+
+//use BEELINE instead of HIVE as HIVE CLI is deprecated. It has similar commands to hive but in a formatted manner.
+
+2 ways to use beeline:
+WAY 1: Embeded Way
+
+#to start beeline
+
+[root@delearhel3 ~]# beeline -u jdbc:hive2://
+
+0: jdbc:hive2://> show databases;
+0: jdbc:hive2://> show tables;
+0: jdbc:hive2://> select col1,col2,.. from tablename;
+
+
+WAY 2: The Remotely colorful way
+[root@delearhel3 ~]# beeline --color=true
+
+beeline> !connect jdbc:hive2://
+
+username is admin
+password is admin
+
+0: jdbc:hive2://> show databases;
+
+http://blog.cloudera.com/blog/2014/02/migrating-from-hive-cli-to-beeline-a-primer/
+
+
+//using HBASE
+to start using shell type:
+[root@delearhel3 ~]# hbase shell
+
+hbase(main):001:0> status
+
+hbase(main):004:0> version
+
+//list all tables
+hbase(main):006:0> list
+
+https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
