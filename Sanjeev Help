@@ -51,3 +51,49 @@ LOCATION '/lionboxsalesdata/';
 
 
 select *, case when col2 is null then col3 else col2 end as new_col from table1
+
+----------------------------------------------------------
+
+ cat wes.breyfogle.csv|awk -F "," '{ print $6}'|head
+  649  cat wes.breyfogle.csv|awk -F "," '{ print $7}'|head
+  650  cat wes.breyfogle.csv|awk -F "," '{ print $7}'|sort|uniq
+  651  cat wes.breyfogle.csv|awk -F "," '{ print $7}'|head
+  652  cat wes.breyfogle.csv|awk -F "," '{ print $7}'|tail
+  653  cat wes.breyfogle.csv|awk -F "," '{ print $7}'|uniq|head
+  654  grep /462231565/484290124/482751092/2098345184/ wes.breyfogle.csv|head
+  655  ls -lrth
+  656  cat FF_Publicis_739601_6_of_7.csv|head
+  
+  curl https://api.box.com/2.0/folders/0 -H "Authorization: Bearer JRamg8YjKGmXMOItdRr1LA4U2nLGkyYS"
+  
+   hadoop fs -ls /
+  684  hadoop fs -ls /user/
+  685  hadoop fs -ls /user/hive/
+  686  hadoop fs -ls /user/hive/warehouse/
+  687  hadoop fs -ls /user/hive/warehouse/testing/
+  688  hadoop fs -cat /user/hive/warehouse/testing/000000_0|head
+  
+  
+   vim testfile
+  717  cat testfile|sort|uniq|wc -l
+  718  cat testfile|head
+  719  cat testfile|awk '{ if($1==null)print $1}'|head
+  720  cat testfile|awk '{ if($1==null)print $1}'|wc-l
+  721  cat testfile|awk '{ if($1==null)print $1}'|wc -l
+  722  cat testfile|awk '{ if($1==null)print $1}'|sort|uniq|wc -l
+  723  vim uniqfile
+  724  cat uniqfile|sort|uniq
+  725  cat uniqfile|sort|uniq|wc -l
+  726  ls -lrth
+  727  cat testfile|sort|uniq|tail
+  728  cat uniqfile|sort|uniq|tail
+  729  ls -lrth
+  730  cat testfile|sort|uniq > sortedfile
+  731  ls -lrth
+  732  cat sortedfile|wc -l
+  733  pwd
+  734  ls -lrth
+  735  grep ausbklbw0223 testfile
+  736  grep ausbklbw0223 sortedfile
+  737  grep AUSBKLBW0223
+
