@@ -78,3 +78,16 @@ To check IP : ifconfig -a
 
 To check Hard Disk : df -kh
 
+--------------------------------------------------
+in linux we have 99% of the softwares in the repository there we just need to type "apt-get install software_name".\
+
+in linux environment whether server or desktop once u made changes in the configuration files of any service or software then u need 
+to put it to restart in order to make that service run according to new configurations.
+
+in linux server environment, lets say webserver which consists of a whole lot of services like apache service, Mysql, Php etc...if 
+u stop any service then the server doesnot stops.
+
+to start/stop/restart any service type "sudo /etc/int.d/service_name start" u can replace start with stop or restart. 
+
+in linux we can see the task manager by typing "top" command.In order to kill any process just press "k", then type the process id.
+in order to explore the top command just type "h" instead of "k"
