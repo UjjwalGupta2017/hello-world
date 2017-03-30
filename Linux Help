@@ -1,1 +1,80 @@
 This file helps you with Linux commands
+#to change color of terminal
+export PS1='\[\033[00;36m\]\u\[\033[00m\]@\[\033[00;36m\]\H\[\033[00m\]:\[\033[00;33m\]\W\[\033[00m\] \$\[\033[00m '
+
+# to check linux version
+cat /etc/centos-release
+
+#to check whether system is 32/64 bit(if x86_64 appears in line then its 64 bit)
+uname -a
+
+#CENTOS(i.e.Community Enterprise Operating System)is RHEL (i.e. RedHat Exterprise linux) that is free,enterprise class and community-supported
+
+#on this pc we have CENTOS 6.4 32 bit and cloudera 4.4.0 ,hive 0.10, hadoop2.0  is installed
+
+#finding java version
+java -version
+
+#finding hadoop version
+hadoop version
+
+#hive version can be found out by typing this in hive shell
+set system:sun.java.command;
+
+
+major linux distributions:Arch, Debian,RedHat and Slackware. 
+Fedora, CentOS, RedHat exterprise comes under REDHAT
+Ubuntu, Mint,Kali comes under Debian
+
+# to check hitory of CLI with date and time
+export HISTTIMEFORMAT='%F %T %t'
+hitory
+
+CTRL-W
+This key combination can be used to cut or delete the entire line that has being typed.
+
+#Using echo to prevent accidents: Typing: echo command(s) could save you the trouble of accidentally doing something you didn't expect.It helps us while deleting anything.See below example.
+echo rm filename
+
+#when u want to list then always use
+ls -ltr
+
+#to mail something from ur system
+mail -s "hello world" ugupta5@sapient.com <<< ‘This is the message’
+
+# create an empty file
+touch jobsuccessfullydone.txt 
+
+#to check the schedules written in linux
+crontab -e
+
+#Opens an existing file for read only
+view filename
+
+#The command to quit out of vi is 
+:q
+
+#to create a new file or edit existing one use
+nano filename
+
+#command to quit out of nano is
+CNTRL+x
+
+#whenever u create a shell script, u also need to give it permissions as well via CHMOD  (The "755" will give you read, write, and execute permission.)
+chmod 755 my_script_name
+
+#to clean terminal
+clear
+
+# Commands to check a linux server configuration
+
+To check OS version : lsb_release -a
+
+To check Memory : cat /proc/meminfo
+
+To check CPU : cat /proc/cpuinfo
+
+To check IP : ifconfig -a
+
+To check Hard Disk : df -kh
+
