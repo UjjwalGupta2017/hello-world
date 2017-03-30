@@ -1,1 +1,53 @@
 -----------Sanjeev Gyan-------------
+semi structured data with ""
+
+
+df -kh
+
+hostname
+
+cat /etc/hosts
+
+hadoop fs -get /vipinlionboxdata/FF_Publicis_739601_1_of_7.csv
+
+
+scp FF_Publicis_739601_1_of_7.csv root@delvmasternode:/root/ujjwal
+
+ hadoop fs -ls /
+ 
+  hadoop fs -ls /vipinlionboxdata
+  
+ rm -rf FF_Publicis_739601_1_of_7.csv FF_Publicis_739601_2_of_7.csv FF_Publicis_739601_6_of_7.csv
+ 
+  hadoop distcp hdfs://delearhel3.sapient.com:8020/vipinlionboxdata/FF_Publicis_739601_1_of_7.csv hdfs://delvmasternode.sapient.com:8020/vipin_lionbox
+
+  
+  cat FF_Publicis_739601_1_of_7.csv|head
+
+  
+   ssh root@delvmasternode.sapient.com
+   
+   select count(regexp_replace(file_name,"\"","")) as file_name, sum(regexp_replace(size,"\"","")) as size, regexp_replace(folder_id,"\"","") as folder_id, (regexp_replace(file_owner,"\"","")) as file_owner from saledata where regexp_replace(folder_id,"\"","") in ('52735935565','16108214099','21472008617','1270108116','2484015399','1938718465','3902858547','2657840493','6972846973','2549358671','1479843743','11022750119','8727324437','2933886335','11508939258','8490197869','17608447146','8019809169','8375052309','3014813101','3065489361','7184343885','3557263771','3204370295','4914914069','5583276169','2950428381','8223556005','6479720385','19701041391','3552082935','3133222873','3908898711','3352648254','5231403101','2465408381','1904134223','1665480586','1938513495','7816900197','1285366211','1164414639','4286213193','4286219297','7836555133','1508189631','2272576121','2562329571','462231565','19262646262','2533397309','6306258053','11991999066','2328029881','251530311','5676791') group by (regexp_replace(file_owner,"\"","")), regexp_replace(folder_id,"\"","");
+   
+   external table
+   
+   CREATE EXTERNAL TABLE saledatapart1 (
+file_name STRING,
+file_id STRING,
+size STRING,
+file_owner STRING,
+folder_id STRING,
+folder_name STRING,
+path_ids STRING,
+folder_owner STRING,
+deleted STRING,
+date_modified STRING,
+date_uploaded STRING
+ )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+LOCATION '/lionboxsalesdata/';
+
+
+select *, case when col2 is null then col3 else col2 end as new_col from table1
